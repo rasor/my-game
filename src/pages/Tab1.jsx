@@ -31,9 +31,9 @@ const Tab1 = () => {
 
 export default Tab1;
 
-const Cell = () => {
+const Cell = ({ width }) => {
   return (
-    <div className="cell" style={{ width: '33.3%' }}/>
+  <div className="cell" style={{ width: `${width}%` }}/>
   )
 }
 
@@ -49,11 +49,17 @@ const Footer = () => {
 }
 
 const Game = ({ gridSize }) => {
-  const cellIds = utils.createArray(gridSize * gridSize)
+  const cellIds = utils.createArray(gridSize * gridSize);
+  const cellWidth = 100 / gridSize;
   return (
     <div className="game">
       <div className="grid">
-        {cellIds.map(cellId => <cell key={cellId}/>)}
+        {cellIds.map(cellId => 
+          <Cell 
+          key={cellId}
+          width={cellWidth}
+          />
+        )}
       </div>
       <Footer/>
     </div>
