@@ -5,11 +5,11 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/react';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './Tab1.css';
 import './style.css';
 
-const Tab1 = () => {
+const Tab1_4 = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -18,13 +18,13 @@ const Tab1 = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-      <GameGenerator />
+      <GameGenerator />  
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab1;
+export default Tab1_4;
 
 /** https://jscomplete.com/playground/rs3.4 */
 const GameStatus = {

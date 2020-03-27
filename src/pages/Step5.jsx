@@ -5,11 +5,11 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/react';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './Tab1.css';
 import './style.css';
 
-const Tab1 = () => {
+const Tab1_5 = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -18,15 +18,15 @@ const Tab1 = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-      <GameGenerator />
+      <GameGenerator />  
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab1;
+export default Tab1_5;
 
-/** https://jscomplete.com/playground/rs3.4 */
+/** https://jscomplete.com/playground/rs3.5 */
 const GameStatus = {
   NEW: 'NEW',
   CHALLENGE: 'CHALLENGE',
@@ -72,7 +72,7 @@ const Footer = ({ gameStatus, startGame }) => {
 };
 const GameSession = ({
   cellIds,
-  challengeCellIds,
+  //challengeCellIds,
   cellWidth,
   //challengeSize,
   //challengeSeconds,
@@ -80,7 +80,9 @@ const GameSession = ({
   //maxWrongAttempts,
 }) => {
   const [gameStatus, setGameStatus] = useState(GameStatus.NEW);
-  console.log(challengeCellIds);
+  //const [pickedCellIds, setPickedCellIds] = useState([]);
+  //const [countdown, setCountdown] = useState(playSeconds);
+  
   return (
     <div className="game">
       <div className="grid">

@@ -1,46 +1,43 @@
-import React from "react";
 import {
   IonContent,
   IonHeader,
-  IonItem,
-  IonLabel,
-  IonList,
   IonPage,
   IonTitle,
   IonToolbar
-} from "@ionic/react";
+} from '@ionic/react';
+import React from 'react';
+import './Tab1.css';
+import './style.css';
 
-const Tab2: React.FC = () => {
+const Tab1_3 = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab Two</IonTitle>
+          <IonTitle>Tab One</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-      <Game 
-        gridSize={5}
-        //challengeSize={6}
-        //challengeSeconds={3}
-        //playSeconds={10}
-        //maxWrongAttempts={3}
-      />      
+        <Game
+          gridSize={5}
+          challengeSize={6}
+          challengeSeconds={3}
+          playSeconds={10}
+          maxWrongAttempts={3}/>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab2;
+export default Tab1_3;
 
-/** https://jscomplete.com/playground/rs3.3 */
-const Cell: React.FC<{width: number;}> = ({ width }) => {
+const Cell = ({ width }) => {
   return (
-    <div className="cell" style={{ width: `${width}%` }} />
-  );
-};
+  <div className="cell" style={{ width: `${width}%` }}/>
+  )
+}
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <>
       <div className="message">Game Message Here...</div>
@@ -48,38 +45,38 @@ const Footer: React.FC = () => {
         <button>Start Game</button>
       </div>
     </>
-  );
-};
+  )
+}
 
-const Game: React.FC<{gridSize: number;}> = ({ gridSize }) => {
+const Game = ({ gridSize }) => {
   const cellIds = utils.createArray(gridSize * gridSize);
   const cellWidth = 100 / gridSize;
   return (
     <div className="game">
       <div className="grid">
-        {cellIds.map(cellId =>
-          <Cell
-            key={cellId}
-            width={cellWidth}
+        {cellIds.map(cellId => 
+          <Cell 
+          key={cellId}
+          width={cellWidth}
           />
         )}
       </div>
-      <Footer />
+      <Footer/>
     </div>
-  );
-};
+  )
+}
 
 /** https://jscomplete.com/playground/rs3.1 */
 // Math science
 const utils = {
   /* Create an array based on a numeric size property.
      Example: createArray(5) => [0, 1, 2, 3, 4] */
-  createArray: (size: number) => Array.from({ length: size }, (_, i) => i),
+  createArray: (size) => Array.from({ length: size }, (_, i) => i),
 
   /* Pick random elements from origArray up to sampleSize
      And use them to form a new array.
      Example: sampleArray([9, 12, 4, 7, 5], 3) => [12, 7, 5] */
-  sampleArray: (origArray: number[], sampleSize: number) => {
+  sampleArray: (origArray, sampleSize) => {
     const copy = origArray.slice(0);
     const sample = [];
     for (let i = 0; i < sampleSize && i < copy.length; i++) {
@@ -93,7 +90,7 @@ const utils = {
      in srcArray exist or do not exist in crossArray.
      Returns an array like [includeCount, excludeCount]
      Example: arrayCrossCounts([0, 1, 2, 3, 4], [1, 3, 5]) => [2, 3] */
-  arrayCrossCounts: (srcArray: number[], crossArray: number[]) => {
+  arrayCrossCounts: (srcArray, crossArray) => {
     let includeCount = 0;
     let excludeCount = 0;
     srcLoop: for (let s = 0; s < srcArray.length; s++) {

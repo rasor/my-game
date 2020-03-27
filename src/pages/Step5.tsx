@@ -1,33 +1,38 @@
+import React, { useState } from "react";
 import {
   IonContent,
   IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
   IonPage,
   IonTitle,
   IonToolbar
-} from '@ionic/react';
-import React, {useState} from 'react';
-import './Tab1.css';
-import './style.css';
+} from "@ionic/react";
 
-const Tab1 = () => {
+const Tab2_5: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab One</IonTitle>
+          <IonTitle>Tab Two</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-      <GameGenerator />
+      <GameGenerator />      
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab1;
+export default Tab2_5;
 
-/** https://jscomplete.com/playground/rs3.4 */
-const GameStatus = {
+/** https://jscomplete.com/playground/rs3.5 */
+interface Dictionary {
+  [key: string]: string;
+};
+
+const GameStatus: Dictionary = {
   NEW: 'NEW',
   CHALLENGE: 'CHALLENGE',
   PLAYING: 'PLAYING',
@@ -35,14 +40,14 @@ const GameStatus = {
   LOST: 'LOST',
 };
 
-const CellStatus = {
+const CellStatus: Dictionary = {
   NORMAL: 'white',
   HIGHLIGHT: 'lightblue',
   CORRECT: 'lightgreen',
   WRONG: 'pink',
 };
 
-const Messages = {
+const Messages: Dictionary = {
   NEW: 'You will have a few seconds to memorize the blue random cells',
   CHALLENGE: 'Remember these blue cells now',
   PLAYING: 'Which cells were blue?',
@@ -50,7 +55,7 @@ const Messages = {
   LOST: 'Game Over',
 };
 
-const Cell = ({ width }) => {
+const Cell: React.FC<{width: number;}> = ({ width }) => {
   const cellStatus = CellStatus.NORMAL;
   return (
     <div
@@ -60,7 +65,7 @@ const Cell = ({ width }) => {
   );
 };
 
-const Footer = ({ gameStatus, startGame }) => {
+const Footer: React.FC<{gameStatus: string; startGame(): void;}> = ({ gameStatus, startGame }) => {
   return (
     <>
       <div className="message">{Messages[gameStatus]}</div>
@@ -70,9 +75,10 @@ const Footer = ({ gameStatus, startGame }) => {
     </>
   );
 };
-const GameSession = ({
+
+const GameSession: React.FC<{cellIds: number[]; challengeCellIds: number[]; cellWidth: number;}> = ({
   cellIds,
-  challengeCellIds,
+  //challengeCellIds,
   cellWidth,
   //challengeSize,
   //challengeSeconds,
@@ -80,7 +86,9 @@ const GameSession = ({
   //maxWrongAttempts,
 }) => {
   const [gameStatus, setGameStatus] = useState(GameStatus.NEW);
-  console.log(challengeCellIds);
+  //const [pickedCellIds, setPickedCellIds] = useState([]);
+  //const [countdown, setCountdown] = useState(playSeconds);
+  
   return (
     <div className="game">
       <div className="grid">
@@ -98,22 +106,23 @@ const GameSession = ({
     </div>
   );
 };
-const GameGenerator = () => {
+
+const GameGenerator: React.FC = () => {
   const gridSize = 5;
-  const challengeSize = 6;
+  const challengeSize: number = 6;
   const cellIds = utils.createArray(gridSize * gridSize);
   const cellWidth = 100 / gridSize;
-  const challengeCellIds = utils.sampleArray(cellIds, challengeSize);
+  const challengeCellIds: number[] = utils.sampleArray(cellIds, challengeSize);
 
   return (
     <GameSession
       cellIds={cellIds}
       challengeCellIds={challengeCellIds}
       cellWidth={cellWidth}
-      challengeSize={challengeSize}
-      challengeSeconds={3}
-      playSeconds={10}
-      maxWrongAttempts={3}
+      //challengeSize={challengeSize}
+      //challengeSeconds={3}
+      //playSeconds={10}
+      //maxWrongAttempts={3}
     />
   );
 };
@@ -123,12 +132,12 @@ const GameGenerator = () => {
 const utils = {
   /* Create an array based on a numeric size property.
      Example: createArray(5) => [0, 1, 2, 3, 4] */
-  createArray: (size) => Array.from({ length: size }, (_, i) => i),
+  createArray: (size: number) => Array.from({ length: size }, (_, i) => i),
 
   /* Pick random elements from origArray up to sampleSize
      And use them to form a new array.
      Example: sampleArray([9, 12, 4, 7, 5], 3) => [12, 7, 5] */
-  sampleArray: (origArray, sampleSize) => {
+  sampleArray: (origArray: number[], sampleSize: number) => {
     const copy = origArray.slice(0);
     const sample = [];
     for (let i = 0; i < sampleSize && i < copy.length; i++) {
@@ -142,7 +151,7 @@ const utils = {
      in srcArray exist or do not exist in crossArray.
      Returns an array like [includeCount, excludeCount]
      Example: arrayCrossCounts([0, 1, 2, 3, 4], [1, 3, 5]) => [2, 3] */
-  arrayCrossCounts: (srcArray, crossArray) => {
+  arrayCrossCounts: (srcArray: number[], crossArray: number[]) => {
     let includeCount = 0;
     let excludeCount = 0;
     srcLoop: for (let s = 0; s < srcArray.length; s++) {
